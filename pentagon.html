@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pentagon Skill Chart (SVG)</title>
+  <style>
+    :root{
+      --size: min(420px, 80vmin);
+      --purple:#3733d1;
+      --teal:#4fc3c7;
+      --green:#1f7a3a;
+      --brown:#8c4b2f;
+      --red:#d92b1f;
+      --label-color: #ffffff;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    body{
+      margin:0;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      background:#f6f7fb;
+    }
+    .wrap{
+      width:var(--size);
+      max-width:100%;
+    }
+    svg{ display:block; width:100%; height:auto; }
+    /* Make text slightly bold and centered along each slice */
+    .slice-label{
+      fill:var(--label-color);
+      font-weight:700;
+      font-size:clamp(14px,2.2vmin,22px);
+      text-anchor:middle;
+      dominant-baseline:middle;
+    }
+    /* Tooltip-like accessible text offscreen for screen readers */
+    .sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- SVG pentagon divided into 5 triangular slices. Labels placed using rotated text. -->
+    <svg viewBox="0 0 600 520" role="img" aria-labelledby="title desc">
+      <title id="title">Pentagon Skill Chart</title>
+      <desc id="desc">A pentagon divided into five colored slices labeled: CSS, HTTP, HTML, JavaScript, Web APIs.</desc>
+
+      <!-- Define center point and outer radius. Using polygon points manually for a nice upright pentagon -->
+      <!-- Outer pentagon points (calculated) -->
+      <defs>
+        <style><![CDATA[
+          .s1{fill:var(--purple)}
+          .s2{fill:var(--teal)}
+          .s3{fill:var(--green)}
+          .s4{fill:var(--brown)}
+          .s5{fill:var(--red)}
+        ]]></style>
+      </defs>
+
+      <!-- Coordinates: center at (300,260) -->
+      <!-- Outer vertices of a regular pentagon (approx) -->
+      <!-- Points computed for visual similarity to provided image -->
+      <!-- Top vertex -->
+      <g transform="translate(0,0)">
+        <!-- Slice 1: top to top-right to center -->
+        <path class="s1" d="M300 30 L439 116 L300 260 Z" />
+        <!-- Slice 2: top-right to bottom-right to center -->
+        <path class="s2" d="M439 116 L379 399 L300 260 Z" />
+        <!-- Slice 3: bottom-right to bottom-left to center -->
+        <path class="s3" d="M379 399 L221 399 L300 260 Z" />
+        <!-- Slice 4: bottom-left to top-left to center -->
+        <path class="s4" d="M221 399 L161 116 L300 260 Z" />
+        <!-- Slice 5: top-left to top to center -->
+        <path class="s5" d="M161 116 L300 30 L300 260 Z" />
+
+        <!-- Labels: positioned roughly centered inside each slice. Rotated to match the sample image. -->
+        <!-- CSS label (rotated slightly counter-clockwise) -->
+        <text class="slice-label" transform="translate(250,120) rotate(-22)">CSS</text>
+        <!-- HTTP label (rotated clockwise) -->
+        <text class="slice-label" transform="translate(360,160) rotate(18)">HTTP</text>
+        <!-- HTML label (vertical-ish) -->
+        <text class="slice-label" transform="translate(380,320) rotate(12)">HTML</text>
+        <!-- JavaScript label (horizontal) -->
+        <text class="slice-label" transform="translate(300,370) rotate(0)">JavaScript</text>
+        <!-- Web APIs label (vertical-ish, rotated counter-clockwise) -->
+        <text class="slice-label" transform="translate(180,250) rotate(-62)">Web APIs</text>
+      </g>
+    </svg>
+
+    <p class="sr-only">SVG pentagon chart with slices: CSS (purple), HTTP (teal), HTML (green), JavaScript (brown), Web APIs (red).</p>
+  </div>
+</body>
+</html>
